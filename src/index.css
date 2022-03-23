@@ -40,7 +40,7 @@ main {
   border: none;
   outline: none;
 
-  backgroung-colour: rgba(255, 255, 0.5, 0.5);
+  background-colour: rgba(255, 255, 0.5, 0.5);
   border-radius: 0px 0px 16px 16px;
   margin-top: -25px;
 
@@ -70,6 +70,7 @@ main {
   font-weight: 300px;
   font-style: italic;
   text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 70, 0.5);
 }
 
 .weather-box {
@@ -91,7 +92,6 @@ main {
 
   text-shadow: 3px 6px rgba(50, 50, 70, 0.5);
   text-align: center;
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .weather-box .weather {
