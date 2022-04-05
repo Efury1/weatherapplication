@@ -7,8 +7,15 @@ const api = {
 }
 
 
-function Greetings({initialName = 'use react fdsa'}) {
-  const [name, setName] = React.useState(initialName)
+function Greetings({initialName = ''}) {
+  const [name, setName] = React.useState(
+    window.localStorage.getItem('name') || initialName
+  )
+
+  //For every update of the component 
+  React.useEffect(() => {
+    window.localStorage.setItem('name', name)
+  })
   
 
   function handleChange(event) {
