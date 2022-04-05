@@ -7,13 +7,33 @@ const api = {
 }
 
 //use to treat like a custom hook
-function useLocalStorageState(key, defaultValue = '') { //Key because we won't always get same value
+function useLocalStorageState(key, defaultValue = '', {
+  serialize = JSON.stringify, 
+  deserialize = JSON.parse,
+} = {}) { //Key because we won't always get same value
   const [state, setState] = React.useState(
-    () => window.localStorage.getItem(key) || defaultValue, 
+    () => {
+      const valueinLocalStorage = window.localStorage.getItem(key)
+      if(valueinLocalStorage) { //If there's a value in local storage
+        return deserialize(valueinLocalStorage) 
+      }
+      // If at type value is function we will call value as function otherwise we will call default value
+      return typeof defaultValue === 'function' ? defaultValue() : defaultValue 
+    },
   )
+
+  //Object you can mutate without triggering re-renders
+  const prevKeyRef = React.useRef(key)
+
+
   React.useEffect(() => { //Every update of component 
-    window.localStorage.setItem(key, state)
-  }, [key, state])
+    const prevKey = prevKeyRef.current
+    if (prevKey !== key) {
+      window.localStorage.removeItem(prevKey) //get rid of old one
+    }
+    prevKeyRef.current = key //equal to new key
+    window.localStorage.setItem(key, serialize(state))
+  }, [key, serialize, state]) //Serialize: if function itself changes, therefore will need to change it
   return [state, setState] //Array of dependecies. Only change use effect when name changes
 }
 
