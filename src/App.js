@@ -8,15 +8,16 @@ const api = {
 
 
 function Greetings({initialName = ''}) {
+  console.log('rendering')
   const [name, setName] = React.useState(
-    window.localStorage.getItem('name') || initialName
+    () => window.localStorage.getItem('name') || initialName
   )
 
   //For every update of the component 
   React.useEffect(() => {
     window.localStorage.setItem('name', name)
   })
-  
+    
 
   function handleChange(event) {
     setName(event.target.value)
@@ -33,7 +34,7 @@ function Greetings({initialName = ''}) {
     </div>
   )
 }
-
+  
 function App() {
       const [query, setQuery] = useState('');
       const [weather, setWeather] = useState({});
@@ -65,7 +66,7 @@ function App() {
        <div className="app warm">
        
         <main>
-        <Greetings initialName="Hello " />
+        <Greetings initialName="Let's check the weather" />
           <div className="search-box">
             <input
               type="text"
