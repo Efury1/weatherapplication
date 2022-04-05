@@ -6,7 +6,8 @@ const api = {
 
 }
 
-function synclocalStorageWithState(key, defaultValue = '') { //Key because we won't always get same value
+//use to treat like a custom hook
+function useLocalStorageState(key, defaultValue = '') { //Key because we won't always get same value
   const [state, setState] = React.useState(
     () => window.localStorage.getItem(key) || defaultValue, 
   )
@@ -18,7 +19,7 @@ function synclocalStorageWithState(key, defaultValue = '') { //Key because we wo
 
 function Greetings({initialName = ''}) {
   console.log('rendering')
-  const [state, setState] = synclocalStorageWithState(initialName)
+  const [state, setState] = useLocalStorageState(initialName)
   function handleChange(event) {
     setState(event.target.value)
   }
