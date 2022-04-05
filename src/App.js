@@ -6,6 +6,27 @@ const api = {
 
 }
 
+
+function Greetings({initialName = 'use react fdsa'}) {
+  const [name, setName] = React.useState(initialName)
+  
+
+  function handleChange(event) {
+    setName(event.target.value)
+  }
+
+  return (
+    <div className="welcome-box">
+      <form>
+        <label htmlFor="name">Name: </label>
+        <input value={name} onChange={handleChange} id="name" />
+      </form>
+      <div>Welcome </div>
+      {name ? <strong> {name} </strong> : 'Please enter your name'}
+    </div>
+  )
+}
+
 function App() {
       const [query, setQuery] = useState('');
       const [weather, setWeather] = useState({});
@@ -35,7 +56,9 @@ function App() {
 
      return (
        <div className="app warm">
+       
         <main>
+        <Greetings initialName="Hello " />
           <div className="search-box">
             <input
               type="text"

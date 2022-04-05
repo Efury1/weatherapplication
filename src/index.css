@@ -19,6 +19,14 @@ body {
   background-image: url('./assets/cold-bg.jpg');
 }
 
+.welcome-box {
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 3px 3px rgba(50, 50, 50, 0.5);
+}
+
 main {
   min-height: 100vh;
   background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.2), rgba(0, 0, 0, 0.75));
@@ -42,7 +50,7 @@ main {
 
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 15px 15px 15px 15px;
-  margin-top: -5px;
+  margin-top: 5px;
 
   box-shadow: 0px 5px rgba(0, 0, 0, 0.2);
 
