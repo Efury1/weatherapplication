@@ -6,31 +6,31 @@ const api = {
 
 }
 
+function synclocalStorageWithState(key, defaultValue = '') { //Key because we won't always get same value
+  const [state, setState] = React.useState(
+    () => window.localStorage.getItem(key) || defaultValue, 
+  )
+  React.useEffect(() => { //Every update of component 
+    window.localStorage.setItem(key, state)
+  }, [key, state])
+  return [state, setState] //Array of dependecies. Only change use effect when name changes
+}
 
 function Greetings({initialName = ''}) {
   console.log('rendering')
-  const [name, setName] = React.useState(
-    () => window.localStorage.getItem('name') || initialName
-  )
-
-  //For every update of the component 
-  React.useEffect(() => {
-    window.localStorage.setItem('name', name)
-  })
-    
-
+  const [state, setState] = synclocalStorageWithState(initialName)
   function handleChange(event) {
-    setName(event.target.value)
+    setState(event.target.value)
   }
 
   return (
     <div className="welcome-box">
       <form>
         <label htmlFor="name">Name: </label>
-        <input value={name} onChange={handleChange} id="name" />
+        <input value={state} onChange={handleChange} id="name" />
       </form>
       <div>Welcome </div>
-      {name ? <strong> {name} </strong> : 'Please enter your name'}
+      {state ? <strong> {state} </strong> : 'Please enter your name'}
     </div>
   )
 }
@@ -62,9 +62,9 @@ function App() {
       return `${day} ${date} ${month} ${year}`
     }
 
+ 
      return (
        <div className="app warm">
-       
         <main>
         <Greetings initialName="Let's check the weather" />
           <div className="search-box">
