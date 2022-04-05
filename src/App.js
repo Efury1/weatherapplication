@@ -37,18 +37,37 @@ function useLocalStorageState(key, defaultValue = '', {
   return [state, setState] //Array of dependecies. Only change use effect when name changes
 }
 
+function Checkbox(props) {
+  const [checked, setChecked] = useState(false);
+  
+  const handleChange = () => {
+    // console.log('checkbox toggled');
+    setChecked(!checked);
+  };
+
+  return (
+    <input type="checkbox" onChange={handleChange}/>
+   
+  
+  );
+};
+
+
+
 function Greetings({initialName = ''}) {
   console.log('rendering')
   const [state, setState] = useLocalStorageState(initialName)
+  const [hide, setHide] = useState(false);
+
   function handleChange(event) {
     setState(event.target.value)
   }
-
   return (
     <div className="welcome-box">
       <form>
         <label htmlFor="name">Name: </label>
         <input value={state} onChange={handleChange} id="name" />
+        <Checkbox />
       </form>
       <div>Welcome </div>
       {state ? <strong> {state} </strong> : 'Please enter your name'}
